@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var token = @HttpContextAccessor.HttpContext.Session.GetString("Token");
+    if (token == null)
+    {
+        token = "Logout";
+    }
+    //
+
+}
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        //session end
+        @*let Token = "";
+        Token=Token+"@token";
+        if (window.location.pathname != "/auth/register" && window.location.pathname != "/auth" && window.location.pathname != "/auth/login") {
+            if (Token == "Logout") {
+                SessionEnd();
+            }
+        }
+        function SessionEnd() {
+            window.location = "/Account/Logout";
+        }*@
+    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Auth</title>
+    <partial name="AdminLTE/_Styles" />
+</head>
+<body class="hold-transition login-page">
+    @RenderBody()
+
+    <partial name="AdminLTE/_Scripts" />
+    <script>
+        $(function() {
+        var message = '@ViewBag.Message';
+        let loginAlert = document.getElementById("loginFailAlert");
+        console.log(message);
+        if (message  != '')
+            loginAlert.style.display = "block";
+        });
+    </script>
+</body>
+</html>

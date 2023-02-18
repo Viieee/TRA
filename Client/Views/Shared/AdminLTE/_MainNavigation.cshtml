@@ -1,0 +1,95 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using System.Security.Claims;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+     var test = HttpContextAccessor.HttpContext.User;
+     List<string> roleValues = new List<string>();
+     if (test?.Claims != null)
+     {
+        var allRoles = test?.Claims?.Where(p => p.Type == ClaimTypes.Role).ToList();
+
+        foreach (var role in allRoles)
+        {
+            roleValues.Add(role.Value);
+        }
+    }
+}
+
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <div class="login-logo">
+        <a style="color: #A1A7AF;"><b style="color: #AFA8A1;">TRA</b>pp</a>
+    </div>
+    <hr>
+    <div class="sidebar">
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                @if (roleValues.Contains("admin"))
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="Department" asp-action="Index" class="nav-link">
+                            <p>
+                                Department
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a asp-controller="Role" asp-action="Index" class="nav-link">
+                            <p>
+                                Role
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a asp-controller="Employee" asp-action="Index" class="nav-link">
+                            <p>
+                                Employee
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a asp-controller="EmployeeRole" asp-action="Index" class="nav-link">
+                            <p>
+                                Employee Role
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (roleValues.Contains("manager"))
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="Request" asp-action="Manager" class="nav-link">
+                            <p>
+                                Manager
+                            </p>
+                        </a>
+                    </li>
+                }
+                @if (roleValues.Contains("finance"))
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="Request" asp-action="Finance" class="nav-link">
+                            <p>
+                                Finance
+                            </p>
+                        </a>
+                    </li>
+                }
+                <li class="nav-item ">
+                    <a asp-controller="Request" asp-action="Index" class="nav-link">
+                        <p>
+                            Request
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a asp-controller="Auth" asp-action="Logout" class="nav-link">
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>

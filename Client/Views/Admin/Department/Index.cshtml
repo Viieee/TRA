@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Department";
+}
+
+<h1>Index</h1>
+<button class="btn btn-primary" onclick="addModalDepartment()" data-toggle="modal" data-target="#modalDepartment">Create New</button>
+
+<table class="table table-striped table-dark" id="dataTablesDepartment">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+</table>
+
+<div class="modal fade" id="modalDepartment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content"  id="modalContentDepartment">
+        </div>
+    </div>
+</div>

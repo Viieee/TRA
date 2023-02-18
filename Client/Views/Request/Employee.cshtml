@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using System.Security.Claims;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var test = HttpContextAccessor.HttpContext.User;
+    string claimedId = "";
+    if (test?.Claims != null)
+    {
+        claimedId += test?.Claims?.SingleOrDefault(p => p.Type == ClaimTypes.NameIdentifier)?.Value;
+    }
+}
+
+<button class="btn btn-primary" onclick="addModalRequest(@claimedId)" data-toggle="modal" data-target="#modalRequest">Create New</button>
+<table class="table table-striped table-dark" id="dataTablesRequest">
+    <thead>
+        <tr>
+            <th>
+
+                Travel Purpose
+            </th>
+            <th>
+                Destination
+            </th>
+            <th>
+                From
+            </th>
+            <th>
+                Until
+            </th>
+            <th>
+                Total Budget
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Employee
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<div class="modal fade" id="modalRequest" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content" id="modalContentRequest">
+            
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cancelConfirmationRequestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" id="modalContentRequestConfirmation">
+
+        </div>
+    </div>
+</div>
